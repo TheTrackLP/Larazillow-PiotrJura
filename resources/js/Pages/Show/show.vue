@@ -15,3 +15,12 @@ setInterval(() => count.value++, 1000);
     <div>The message: {{ message }}</div>
     <div>The phone number: {{ numberPhone }}</div>
 </template>
+
+<!-- This method makes a persistent layout that you dont want to lose your data without refreshing-->
+<script>
+import MainLayout from "../Layouts/MainLayout.vue";
+
+export default {
+    layout: MainLayout,
+};
+</script>
