@@ -18,7 +18,7 @@ setInterval(() => count.value++, 1000);
 
 <!-- This method makes a persistent layout that you dont want to lose your data without refreshing-->
 <script>
-import MainLayout from "../Layouts/MainLayout.vue";
+import MainLayout from "@/Layouts/MainLayout.vue";
 
 export default {
     layout: MainLayout,

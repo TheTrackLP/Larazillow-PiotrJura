@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('beds');
-            $table->tinyInteger('baths');
-            $table->tinyInteger('area');
-            $table->tinyText('city');
-            $table->tinyText('code');
-            $table->tinyText('street');
-            $table->tinyText('street_nr');
+            $table->integer('beds');
+            $table->integer('baths');
+            $table->integer('area');
+            $table->text('city');
+            $table->text('code');
+            $table->text('street');
+            $table->text('street_nr');
             $table->integer('price');
             $table->timestamps();
         });

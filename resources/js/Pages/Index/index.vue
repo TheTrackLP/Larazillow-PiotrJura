@@ -11,7 +11,7 @@ const name = ref("Emman");
 </template>
 
 <script>
-import MainLayout from "../Layouts/MainLayout.vue";
+import MainLayout from "@/Layouts/MainLayout.vue";
 
 export default {
     layout: MainLayout,
