@@ -7,6 +7,7 @@ defineProps({
 
 <script>
 import MainLayout from "@/Layouts/MainLayout.vue";
+import ListingAddress from "@/Components/ListingAddress.vue";
 
 export default {
     layout: MainLayout,
@@ -15,8 +16,7 @@ export default {
 <template>
     <div v-for="listing in listings" :key="listing.id">
         <Link :href="`/listing/${listing.id}`">
-            {{ listing.street }}, {{ listing.street_nr }}, {{ listing.city }},
-            for ${{ listing.price }}</Link
-        >
+            <ListingAddress :listing="listing" />
+        </Link>
     </div>
 </template>

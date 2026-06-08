@@ -6,13 +6,13 @@ defineProps({
 
 <template>
     <div>
-        {{ listing.street }}, {{ listing.street_nr }}, {{ listing.city }}, for
-        ${{ listing.price }}
+        <!-- Create a component IF the data will be shown or use a form on REPEAT-->
+        <ListingAddress :listing="listing" />
     </div>
 </template>
 <script>
 import MainLayout from "@/Layouts/MainLayout.vue";
-
+import ListingAddress from "@/Components/ListingAddress.vue";
 export default {
     layout: MainLayout,
 };

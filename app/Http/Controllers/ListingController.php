@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Validator;
 
 class ListingController extends Controller
 {
@@ -23,7 +24,7 @@ class ListingController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Listing/Create');
     }
 
     /**
@@ -31,7 +32,42 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Method 1
+        // $valid = Validator::make($request->all(), [
+        //     'beds' => 'required',
+        //     'baths' => 'required',
+        //     'area' => 'required',
+        //     'city' => 'required',
+        //     'street' => 'required',
+        //     'code' => 'required',
+        //     'street_nr' => 'required',
+        //     'price' => 'required',
+        // ]);
+
+        // if($valid->fails()){
+        //     return inertia('Listing/Create', [
+        //         'errors' => $valid->errors()
+        //     ]);
+        // }
+
+        // Listing::create($request->all());
+
+        //Method 2
+
+        $listing = new Listing();
+
+        $listing->beds = $request->beds;
+        $listing->baths = $request->baths;
+        $listing->area = $request->area;
+        $listing->city = $request->city;
+        $listing->street = $request->street;
+        $listing->code = $request->code;
+        $listing->street_nr = $request->street_nr;
+        $listing->price = $request->price;
+
+        $listing->save();
+
+        return redirect()->route('listing.index');
     }
 
     /**
