@@ -37,7 +37,11 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+                //This method will be access throughout the app, so we can use it to flash messages after actions like create, update, delete etc.
+                'flash' => [
+                    'success' => $request->session()->get('success')
+                ],
+            
         ];
     }
 }

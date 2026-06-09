@@ -54,20 +54,34 @@ class ListingController extends Controller
 
         //Method 2
 
-        $listing = new Listing();
+        // $listing = new Listing();
 
-        $listing->beds = $request->beds;
-        $listing->baths = $request->baths;
-        $listing->area = $request->area;
-        $listing->city = $request->city;
-        $listing->street = $request->street;
-        $listing->code = $request->code;
-        $listing->street_nr = $request->street_nr;
-        $listing->price = $request->price;
+        // $listing->beds = $request->beds;
+        // $listing->baths = $request->baths;
+        // $listing->area = $request->area;
+        // $listing->city = $request->city;
+        // $listing->street = $request->street;
+        // $listing->code = $request->code;
+        // $listing->street_nr = $request->street_nr;
+        // $listing->price = $request->price;
 
-        $listing->save();
+        // $listing->save();
 
-        return redirect()->route('listing.index');
+        Listing::create(
+            $request->validate([
+                'beds' => 'required|integer|min:0|max:20',
+                'baths' => 'required|integer|min:0|max:20',
+                'area' => 'required|integer|min:15|max:1500',
+                'city' => 'required',
+                'street' => 'required',
+                'code' => 'required',
+                'street_nr' => 'required|min:1|max:1000',
+                'price' => 'required|integer|min:1|max:20000000',
+            ])
+        );
+
+        return redirect()->route('listing.index')
+        ->with('success', 'Listing created successfully.');
     }
 
     /**
@@ -84,24 +98,44 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(listing $listing)
     {
-        //
+       return inertia('Listing/Edit',
+        [
+            'listing' => $listing
+        ]);   
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, listing $listing)
     {
-        //
+        $listing->update(
+            $request->validate([
+                'beds' => 'required|integer|min:0|max:20',
+                'baths' => 'required|integer|min:0|max:20',
+                'area' => 'required|integer|min:15|max:1500',
+                'city' => 'required',
+                'street' => 'required',
+                'code' => 'required',
+                'street_nr' => 'required|min:1|max:1000',
+                'price' => 'required|integer|min:1|max:20000000',
+            ])
+        );
+
+        return redirect()->route('listing.index')
+        ->with('success', 'Listing updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(listing $listing)
     {
-        //
+        $listing->delete();
+
+        return redirect()->route('listing.index')
+        ->with('success', 'Listing deleted successfully.');
     }
 }
